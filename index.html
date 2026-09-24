@@ -1,18 +1,926 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reward-DAgger</title>
-</head>
-<body>
-  <h1>Reward-DAgger</h1>
-  <p>Anonymous project website for an ICRA submission.</p>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reward-DAgger: Robot-Gated Interactive Imitation Learning with General-Purpose Progress-Based Reward Models</title>
 
-  <img
-    src="teaser.png"
-    alt="This is a gold dagger."
-    style="max-width: 900px; width: 50%; height: auto;"
-  >
-</body>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async
+      src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./static/images/hand_logo_emoji.png">
+    <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+              displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+      });
+    </script>
+    <script type="text/javascript" async
+  src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <style>
+        .reward-dagger-highlight {
+            color: #D97706;
+            font-weight: bold;
+        }
+
+        .results-table-wrapper {
+            overflow-x: auto;
+            margin: 0 auto 0.75em auto;
+        }
+
+        table.results-table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            font-size: 16px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        table.results-table th,
+        table.results-table td {
+            padding: 0.35em 0.6em;
+            text-align: right;
+            white-space: nowrap;
+            border: none;
+        }
+
+        table.results-table th:first-child,
+        table.results-table td:first-child,
+        table.results-table th.label,
+        table.results-table td.label {
+            text-align: left;
+        }
+
+        table.results-table td.row-group {
+            vertical-align: middle;
+        }
+
+        table.results-table thead tr:first-child th {
+            border-top: 1.5px solid #363636;
+        }
+
+        table.results-table .group-head {
+            text-align: center;
+            font-weight: bold;
+            padding-bottom: 0.15em;
+        }
+
+        table.results-table .group-rule {
+            border-bottom: 0.8px solid #363636;
+        }
+
+        table.results-table thead tr:last-child th {
+            border-bottom: 1px solid #363636;
+        }
+
+        table.results-table tbody tr.section-rule td {
+            border-top: 0.8px solid #363636;
+        }
+
+        table.results-table tbody tr:last-child td {
+            border-bottom: 1.5px solid #363636;
+        }
+
+        .table-caption {
+            font-size: 16px;
+            text-align: left;
+            max-width: 900px;
+            margin: 0 auto 1.5em auto;
+        }
+    </style>
+  </head>
+  
+  <body>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title"> Reward-DAgger: Robot-Gated Interactive Imitation Learning with General-Purpose Progress-Based Reward Models</h1>
+              <!-- <div class="is-size-5 publication-authors">
+                <span class="author-block"></span>
+              </div> -->
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- Code Link. -->
+                  <span class="link-block">
+                    <a href=""
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+                  <!-- Supplementary Material Link. -->
+                  <span class="link-block">
+                    <a href="./static/pdf/reward_dagger_supplementary.pdf"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-book"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container is-max-desktop" style="margin-bottom: 32px;">
+      <div class="columns is-centered">
+        <p style="text-align: justify; font-size: 24px; margin-bottom: 0px;">
+          <strong><em>
+            We introduce <span class="reward-dagger-highlight">Reward-DAgger</span>, a robot-gated interactive imitation learning framework that detects progress drops and plateaus using estimates from a general-purpose reward model.
+          </em></strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Video Section -->
+    <!-- <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-12">
+            <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
+              <video style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                controls autoplay muted loop >
+                <source src="./static/media/reward_dagger_video.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <section class="hero teaser">
+      <div class="hero-body">
+        <div class="container is-max-desktop" style="text-align: center;">
+          <div style="text-align: center;">
+            <img src="./static/media/framework.png" alt="framework">
+          </div>
+        
+          <div class="columns is-centered" style="margin-top: 16px; margin-bottom: 16px;">
+            <div class="column" style="display: flex; justify-content: center;">
+              <div style="border: 2px solid #c00; border-radius: 8px; padding: 16px; background: #ffeaea; text-align: left; width: 100%;">
+                <strong>Short-window gate</strong> detects rapid decreases in progress, capturing immediate failures such as dropping an object.
+              </div>
+            </div>
+            <div class="column" style="display: flex; justify-content: center;">
+              <div style="border: 2px solid #e6b800; border-radius: 8px; padding: 16px; background: #fff8e1; text-align: left; width: 100%;">
+                <strong>Long-window gate</strong> detects progress plateaus corresponding to stalled behavior, such as repeatedly failed grasps.
+              </div>
+            </div>
+            <div class="column" style="display: flex; justify-content: center;">
+              <div style="border: 2px solid #0074d9; border-radius: 8px; padding: 16px; background: #e7f2ff; text-align: left; width: 100%;">
+                <strong>Reward-DAgger</strong> operates across policy checkpoints and architectures, including black-box policies, without retraining or recalibrating the gate between DAgger rounds.
+              </div>
+            </div>
+          </div>
+          
+          <!-- Method -->
+          <h3 class="title is-3">Method</h3>
+
+          <div class="content has-text-justified" style="font-size: 18px;">
+            <p>
+              Reward-DAgger monitors the <strong>temporal evolution of task progress</strong> predicted by a
+              general-purpose reward model. Given the observation history \(o_{\leq t}\) and task instruction
+              \(\ell\), the reward model outputs a scalar progress estimate:
+            </p>
+
+            <div style="text-align: center; margin: 1.2em 0;">
+              \[
+                \phi_t = f_{\psi}(o_{\leq t}, \ell).
+              \]
+            </div>
+
+            <p>
+              We then examine the recent progress history at two timescales: a <strong>short window</strong>
+              of length \(L_s\) for detecting abrupt progress drops, and a <strong>long window</strong> of
+              length \(L_l\) for detecting sustained progress plateaus, where \(L_l &gt; L_s\).
+              In each window, we compute the <strong>Spearman rank correlation</strong> between predicted progress
+              and time:
+            </p>
+
+            <div style="text-align: center; margin: 1.2em 0;">
+              \[
+                \rho_t^s = \rho\!\left(\phi_{t-L_s+1:t}\right),
+                \qquad
+                \rho_t^l = \rho\!\left(\phi_{t-L_l+1:t}\right).
+              \]
+            </div>
+
+            <p>
+              Since correlation captures the <em>direction</em> of a trend but not its magnitude, the short-window
+              gate also checks the maximum observed progress drop:
+            </p>
+
+            <div style="text-align: center; margin: 1.2em 0;">
+              \[
+                \Delta_t =
+                \max_{j \in \{t-L_s+1,\ldots,t\}}
+                \left(\phi_j - \phi_t\right).
+              \]
+            </div>
+
+            <p>
+              The two gates are combined as:
+            </p>
+
+            <div style="text-align: center; margin: 1.2em 0;">
+              \[
+                g_t^s =
+                \mathbb{I}\!\left[
+                  (\rho_t^s &lt; \tau_s)
+                  \wedge
+                  (\Delta_t \geq \delta_{\min})
+                \right],
+                \qquad
+                g_t^l =
+                \mathbb{I}\!\left[
+                  \rho_t^l &lt; \tau_l
+                \right],
+              \]
+              \[
+                g_t = g_t^s \vee g_t^l .
+              \]
+            </div>
+
+            <p>
+              If either gate fires, <span class="reward-dagger-highlight">Reward-DAgger</span> requests expert
+              takeover. The resulting corrections are aggregated with the existing dataset and used to finetune
+              the policy, while the reward model and gate configuration remain fixed across DAgger rounds.
+            </p>
+          </div>
+
+          <!-- Example progress drops and plateaus -->
+          <h4 class="title is-4" style="text-align: center;">Example Progress Drops and Plateaus</h4>
+          <div class="tabs is-toggle is-centered" style="margin-bottom: 0.75em;">
+            <ul id="progress-type-tabs">
+              <li class="is-active" data-type="drop"><a>Progress Drop</a></li>
+              <li data-type="plateau"><a>Progress Plateau</a></li>
+            </ul>
+          </div>
+          <div class="tabs is-small is-toggle is-centered">
+            <ul id="progress-task-tabs">
+              <li class="is-active" data-task="stack_cubes"><a>Stack Cubes</a></li>
+              <li data-task="pick_up_marker"><a>Pick up Marker</a></li>
+              <li data-task="put_bread"><a>Put Bread</a></li>
+              <li data-task="remove_objects"><a>Remove Objects</a></li>
+            </ul>
+          </div>
+
+          <!-- Videos live in static/media/progress_examples/ and are named <task>_<drop|plateau>.mp4 -->
+          <video id="progress-video" class="progress-video" src="./static/media/progress_examples/stack_cubes_drop.mp4" autoplay muted loop playsinline></video>
+          <p class="progress-caption">
+            Example progress drops and plateaus from the real robot evaluation tasks. All videos are played at 2&times; speed.
+          </p>
+          <!-- Shown only on the Progress Drop tab -->
+          <p class="progress-note" id="progress-note">
+            <i class="fas fa-info-circle"></i>
+            <strong>Put Bread</strong> has no progress drop example because the policy never visibly undoes progress on this task, such as dropping the bread once it's lifted.
+          </p>
+
+          <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              // Tasks with no example for a given type (their button is disabled)
+              var missing = { drop: ["put_bread"], plateau: [] };
+
+              var typeTabs = document.querySelectorAll('#progress-type-tabs li');
+              var taskTabs = document.querySelectorAll('#progress-task-tabs li');
+              var video = document.getElementById('progress-video');
+              var type = "drop";
+              var task = "stack_cubes";
+
+              function update() {
+                // If the selected task has no video for this type, jump to the first task that does
+                if (missing[type].indexOf(task) !== -1) {
+                  task = Array.prototype.find.call(taskTabs, function(t) {
+                    return missing[type].indexOf(t.getAttribute('data-task')) === -1;
+                  }).getAttribute('data-task');
+                }
+                typeTabs.forEach(function(t) { t.classList.toggle('is-active', t.getAttribute('data-type') === type); });
+                taskTabs.forEach(function(t) {
+                  var name = t.getAttribute('data-task');
+                  t.classList.toggle('is-active', name === task);
+                  t.classList.toggle('is-disabled', missing[type].indexOf(name) !== -1);
+                });
+                document.getElementById('progress-note').hidden = missing[type].length === 0;
+                video.src = "./static/media/progress_examples/" + task + "_" + type + ".mp4";
+                video.play();
+              }
+
+              typeTabs.forEach(function(t) {
+                t.addEventListener('click', function() { type = t.getAttribute('data-type'); update(); });
+              });
+              taskTabs.forEach(function(t) {
+                t.addEventListener('click', function() {
+                  if (t.classList.contains('is-disabled')) return;
+                  task = t.getAttribute('data-task');
+                  update();
+                });
+              });
+              update();
+            });
+          </script>
+
+          <br>
+          <!-- Failure Detection Experiments -->
+          <h3 class="title is-3">Failure Detection Experiments</h3>
+
+          <div class="failure-task-gallery" aria-label="Simulation task rollouts">
+            <figure class="failure-task-card">
+              <img src="./static/media/sim_tasks/task0.gif"
+                alt="Task 0 rollout: putting the alphabet soup and tomato sauce in the basket"
+                loading="lazy" decoding="async">
+              <figcaption>
+                <span class="failure-task-label">Task 0</span>
+                Put both the alphabet soup and the tomato sauce in the basket.
+              </figcaption>
+            </figure>
+
+            <figure class="failure-task-card">
+              <img src="./static/media/sim_tasks/task1.gif"
+                alt="Task 1 rollout: putting the cream cheese box and butter in the basket"
+                loading="lazy" decoding="async">
+              <figcaption>
+                <span class="failure-task-label">Task 1</span>
+                Put both the cream cheese box and the butter in the basket.
+              </figcaption>
+            </figure>
+
+            <figure class="failure-task-card">
+              <img src="./static/media/sim_tasks/task4.gif"
+                alt="Task 4 rollout: putting the white mug on the left plate and the yellow and white mug on the right plate"
+                loading="lazy" decoding="async">
+              <figcaption>
+                <span class="failure-task-label">Task 4</span>
+                Put the white mug on the left plate and the yellow and white mug on the right plate.
+              </figcaption>
+            </figure>
+
+            <figure class="failure-task-card">
+              <img src="./static/media/sim_tasks/task6.gif"
+                alt="Task 6 rollout: putting the white mug on the plate and the chocolate pudding on the right of the plate"
+                loading="lazy" decoding="async">
+              <figcaption>
+                <span class="failure-task-label">Task 6</span>
+                Put the white mug on the plate and the chocolate pudding on the right of the plate.
+              </figcaption>
+            </figure>
+
+            <figure class="failure-task-card">
+              <img src="./static/media/sim_tasks/task5.gif"
+                alt="Task 5 rollout: placing the book in the back compartment of the caddy"
+                loading="lazy" decoding="async">
+              <figcaption>
+                <span class="failure-task-label">Task 5</span>
+                Pick up the book and place it in the back compartment of the caddy.
+              </figcaption>
+            </figure>
+
+            <figure class="failure-task-card">
+              <img src="./static/media/sim_tasks/task8.gif"
+                alt="Task 8 rollout: putting both moka pots on the stove"
+                loading="lazy" decoding="async">
+              <figcaption>
+                <span class="failure-task-label">Task 8</span>
+                Put both moka pots on the stove.
+              </figcaption>
+            </figure>
+          </div>
+
+          <div style="text-align: center; margin-bottom: 1em;">
+            <img src="./static/media/detection_frontier.png" alt="Failure detection frontier: balanced accuracy vs. normalized trigger time for Reward-DAgger and baselines" style="width: 100%;">
+          </div>
+
+          <div class="content has-text-justified" style="font-size: 18px; text-align: center;">
+            <span class="reward-dagger-highlight">Reward-DAgger</span> achieves the highest maximum balanced accuracy on every task, 
+            reaching at least 0.96. Its frontier also lies above or on par with the baselines.
+          </div>
+
+          <br>
+          <!-- Transfer of Gating Configurations -->
+          <h3 class="title is-3">Transfer of Gating Configurations</h3>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start; margin-bottom: 1.25em;">
+            <div style="flex: 1 1 420px; min-width: 280px; max-width: 490px;">
+              <div class="table-caption" style="font-size: 14px;">
+                <b>Transfer results</b> at a balanced accuracy threshold $\epsilon=0.02$ for three-to-one transfer and held-out Tasks 4 and 6.
+                $\Delta\mathrm{BA}$ is the change in balanced accuracy,
+                $T_{\mathrm{det}}$ is mean normalized trigger time and Pen is matched-accuracy latency penalty.
+              </div>
+              <div class="results-table-wrapper" style="font-size: 13px; max-width: 100%; overflow-x: auto;">
+                <table class="results-table transfer-table" style="font-size: 13px;">
+                  <thead>
+                    <tr>
+                      <th style="min-width: 55px;"></th>
+                      <th class="group-head group-rule" colspan="3" style="font-size:12px;">3-to-1</th>
+                      <th class="group-head group-rule" colspan="3" style="font-size:12px;">on T4</th>
+                      <th class="group-head group-rule" colspan="3" style="font-size:12px;">on T6</th>
+                    </tr>
+                    <tr>
+                      <th style="white-space:nowrap;font-size:12px;">Held-out</th>
+                      <th style="min-width:38px;">$\Delta$BA</th>
+                      <th style="min-width:38px;">$T_\mathrm{det}$</th>
+                      <th style="min-width:29px;">Pen</th>
+                      <th style="min-width:38px;">$\Delta$BA</th>
+                      <th style="min-width:38px;">$T_\mathrm{det}$</th>
+                      <th style="min-width:29px;">Pen</th>
+                      <th style="min-width:38px;">$\Delta$BA</th>
+                      <th style="min-width:38px;">$T_\mathrm{det}$</th>
+                      <th style="min-width:29px;">Pen</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="white-space:nowrap;">Task 0</td>
+                      <td>-1.2</td><td>0.354</td><td>9.0</td>
+                      <td>-4.4</td><td>0.286</td><td>0.8</td>
+                      <td>-1.7</td><td>0.384</td><td>8.7</td>
+                    </tr>
+                    <tr>
+                      <td style="white-space:nowrap;">Task 1</td>
+                      <td>-0.9</td><td>0.341</td><td>4.3</td>
+                      <td>-11.0</td><td>0.260</td><td>11.7</td>
+                      <td>-0.8</td><td>0.379</td><td>3.6</td>
+                    </tr>
+                    <tr>
+                      <td style="white-space:nowrap;">Task 5</td>
+                      <td>1.4</td><td>0.336</td><td>11.2</td>
+                      <td>-1.3</td><td>0.352</td><td>1.9</td>
+                      <td>0.0</td><td>0.400</td><td>6.7</td>
+                    </tr>
+                    <tr>
+                      <td style="white-space:nowrap;">Task 8</td>
+                      <td>0.5</td><td>0.485</td><td>4.5</td>
+                      <td>-1.3</td><td>0.352</td><td>1.9</td>
+                      <td>0.0</td><td>0.400</td><td>6.7</td>
+                    </tr>
+                    <tr class="section-rule">
+                      <td style="white-space:nowrap;">None (all 4)</td>
+                      <td>&ndash;</td><td>&ndash;</td><td>&ndash;</td>
+                      <td>-1.3</td><td>0.352</td><td>1.9</td>
+                      <td>0.4</td><td>0.412</td><td>3.2</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="content has-text-justified" style="font-size: 18px; text-align: center; margin-top: 1em;">
+                By calibrating across a broad set of source tasks, reward gate configurations transfer reliably to target tasks, preserving 
+                balanced accuracy and inducing a small, controllable latency penalty.
+              </div>
+            </div>
+            <div style="flex: 1 1 350px; min-width: 320px; max-width: 570px; display: flex; flex-direction: column; align-items: center;">
+              <img src="./static/media/gate_transfer.png" alt="transfer_gating_configurations" style="width: 100%; max-width: 430px;">
+              <div class="table-caption" style="font-size: 14px; text-align: center; margin-top: 0.5em;">
+                <b>Frontier transfer of Reward-DAgger gate configurations.</b> The solid orange curve denotes the native frontier obtained through
+                task-specific tuning, and each dashed curve is obtained by applying configurations from another
+                task's frontier without retuning. Numbers indicate the hypervolume ratios (HVR) for each transferred curve. The dashed grey 
+                line indicates the mean normalized length of successful trajectories.
+              </div>
+            </div>
+ 
+          </div>
+          <br>
+          <!-- Downstream Policy Improvement -->
+          <h3 class="title is-3">Downstream Policy Improvement</h3>
+          <div style="background: #FFFBEA; border-left: 4px solid #D97706; padding: 0.75em 1em; font-size: 1.13em; margin-bottom: 0.75em; text-align: justify;">
+            <b>The same reward model and gate configuration is used without additional tuning across eight simulated and real-world tasks, and different policy architectures.</b>
+          </div>
+  
+          <h4 class="title is-4">Simulation</h4>
+          <div class="content has-text-justified" style="font-size: 18px; text-align: center;">
+            <div style="text-align: center;">
+              <img src="./static/media/sim_metrics.png" alt="transfer_gating_configurations">
+            </div>
+            <span class="reward-dagger-highlight">Reward-DAgger</span> improves autonomous success rates across the evaluated simulation tasks, while achieving the highest or near-highest ROHE throughout data collection.
+
+          </div>
+
+          <h4 class="title is-4" id="real-world-results">Real World</h4>
+
+          <div class="results-table-wrapper real-world-table-wrapper">
+            <table class="results-table real-world-table">
+              <!-- <caption>
+                Real-world downstream policy performance across three DAgger rounds.
+                <span>Bold values indicate the strongest results.</span>
+              </caption> -->
+              <thead>
+                <tr>
+                  <th class="task-heading" rowspan="2" scope="col">Task</th>
+                  <th class="method-heading" rowspan="2" scope="col">Method</th>
+                  <th class="group-head" colspan="3" scope="colgroup">
+                    Success rate <span>(%)</span>
+                  </th>
+                  <th class="group-head metric-divider" colspan="3" scope="colgroup">ROHE</th>
+                </tr>
+                <tr class="round-headings">
+                  <th scope="col">R0</th>
+                  <th scope="col">R1</th>
+                  <th scope="col">R2</th>
+                  <th class="metric-divider" scope="col">R0</th>
+                  <th scope="col">R1</th>
+                  <th scope="col">R2</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="task-row-start reward-dagger-row">
+                  <th class="row-group" rowspan="3" scope="rowgroup">Stack</th>
+                  <th class="method-name" scope="row">Reward-DAgger</th>
+                  <td>65</td><td><b>75</b></td><td><b>80</b></td>
+                  <td><b>.667</b></td><td>.731</td><td><b>.643</b></td>
+                </tr>
+                <tr>
+                  <th class="method-name" scope="row">ThriftyDAgger</th>
+                  <td>65</td><td>70</td><td>55</td>
+                  <td>.606</td><td>.556</td><td>.513</td>
+                </tr>
+                <tr>
+                  <th class="method-name" scope="row">Diff-DAgger</th>
+                  <td>65</td><td><b>75</b></td><td>70</td>
+                  <td>.588</td><td><b>.783</b></td><td>.600</td>
+                </tr>
+
+                <tr class="task-row-start reward-dagger-row">
+                  <th class="row-group" rowspan="3" scope="rowgroup">Pick</th>
+                  <th class="method-name" scope="row">Reward-DAgger</th>
+                  <td>20</td><td>30</td><td><b>40</b></td>
+                  <td>.541</td><td><b>.533</b></td><td><b>.588</b></td>
+                </tr>
+                <tr>
+                  <th class="method-name" scope="row">ThriftyDAgger</th>
+                  <td>20</td><td>25</td><td>25</td>
+                  <td>.526</td><td>.474</td><td>.424</td>
+                </tr>
+                <tr>
+                  <th class="method-name" scope="row">Diff-DAgger</th>
+                  <td>20</td><td><b>35</b></td><td><b>40</b></td>
+                  <td><b>.548</b></td><td>.435</td><td>.478</td>
+                </tr>
+
+                <tr class="task-row-start reward-dagger-row">
+                  <th class="row-group" rowspan="3" scope="rowgroup">Put</th>
+                  <th class="method-name" scope="row">Reward-DAgger</th>
+                  <td>35</td><td><b>40</b></td><td>45</td>
+                  <td><b>.594</b></td><td><b>.606</b></td><td><b>.645</b></td>
+                </tr>
+                <tr>
+                  <th class="method-name" scope="row">ThriftyDAgger</th>
+                  <td>35</td><td>35</td><td><b>50</b></td>
+                  <td>.559</td><td>.500</td><td>.526</td>
+                </tr>
+                <tr>
+                  <th class="method-name" scope="row">Diff-DAgger</th>
+                  <td>35</td><td>20</td><td>30</td>
+                  <td>.500</td><td>.346</td><td>.528</td>
+                </tr>
+
+                <tr class="task-row-start reward-dagger-row">
+                  <th class="row-group" rowspan="3" scope="rowgroup">Remove</th>
+                  <th class="method-name" scope="row">Reward-DAgger</th>
+                  <td>75</td><td><b>85</b></td><td><b>90</b></td>
+                  <td><b>.588</b></td><td><b>.714</b></td><td>.769</td>
+                </tr>
+                <tr>
+                  <th class="method-name" scope="row">ThriftyDAgger</th>
+                  <td>75</td><td>70</td><td>80</td>
+                  <td>.526</td><td>.486</td><td>.563</td>
+                </tr>
+                <tr>
+                  <th class="method-name" scope="row">Diff-DAgger</th>
+                  <td>75</td><td>70</td><td>80</td>
+                  <td>.545</td><td>.613</td><td><b>.773</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="content has-text-justified" style="font-size: 18px; text-align: center;">
+            <span class="reward-dagger-highlight">Reward-DAgger</span> consistently improves autonomous success across DAgger rounds, obtaining the highest ROHE in most settings and staying comparable in the others.          </div>
+          <br>
+          <h4 class="title is-4">Evaluation Videos</h4>
+          <div class="content">
+            <!-- Tab navigation -->
+            <div class="tabs is-toggle is-centered" style="margin-bottom: 2em;">
+              <ul id="eval-tabs">
+                <li class="is-active" data-tab="stack-cubes"><a>Stack Cubes</a></li>
+                <li data-tab="pick-up-marker"><a>Pick up Marker</a></li>
+                <li data-tab="put-bread"><a>Put Bread</a></li>
+                <li data-tab="remove-objects"><a>Remove Objects</a></li>
+              </ul>
+            </div>
+
+            <!-- Tab panes -->
+            <div id="eval-tab-content" style="margin-top: 1.5em;">
+              
+              <!-- Stack Cubes Tab -->
+              <div class="tab-pane" id="tab-stack-cubes" style="">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px;">
+                  <div style="text-align: center;">
+                    <p><strong><span>Before Finetuning</span></strong></p>
+                    <video src="./static/media/eval_videos/stack_cubes_before.mp4" aria-label="Stack Cubes before finetuning" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+                  </div>
+                  <div style="text-align: center;">
+                    <p><strong><span>After Finetuning</span></strong></p>
+                    <video src="./static/media/eval_videos/stack_cubes_after.mp4" aria-label="Stack Cubes after finetuning" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Pick up Marker Tab -->
+              <div class="tab-pane" id="tab-pick-up-marker" style="display:none;">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px;">
+                  <div style="text-align: center;">
+                    <p><strong><span>Before Finetuning</span></strong></p>
+                    <video src="./static/media/eval_videos/pick_up_marker_before.mp4" aria-label="Pick up Marker before finetuning" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+                  </div>
+                  <div style="text-align: center;">
+                    <p><strong><span>After Finetuning</span></strong></p>
+                    <video src="./static/media/eval_videos/pick_up_marker_after.mp4" aria-label="Pick up Marker after finetuning" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Put Bread Tab -->
+              <div class="tab-pane" id="tab-put-bread" style="display:none;">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px;">
+                  <div style="text-align: center;">
+                    <p><strong><span>Before Finetuning</span></strong></p>
+                    <video src="./static/media/eval_videos/put_bread_before.mp4" aria-label="Put Bread before finetuning" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+                  </div>
+                  <div style="text-align: center;">
+                    <p><strong><span>After Finetuning</span></strong></p>
+                    <video src="./static/media/eval_videos/put_bread_after.mp4" aria-label="Put Bread after finetuning" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Remove Objects Tab -->
+              <div class="tab-pane" id="tab-remove-objects" style="display:none;">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px;">
+                  <div style="text-align: center;">
+                    <p><strong><span>Before Finetuning</span></strong></p>
+                    <video src="./static/media/eval_videos/remove_objects_before.mp4" aria-label="Remove Objects before finetuning" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+                  </div>
+                  <div style="text-align: center;">
+                    <p><strong><span>After Finetuning</span></strong></p>
+                    <video src="./static/media/eval_videos/remove_objects_after.mp4" aria-label="Remove Objects after finetuning" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <p class="progress-caption">
+              Policy rollouts before and after finetuning with Reward-DAgger. All videos are played at 2&times; speed.
+            </p>
+          </div>
+
+          <br>
+          <!-- Ablations -->
+          <h3 class="title is-3">Ablations</h3>
+          <div class="ablation-sections" style="display: flex; flex-wrap: wrap; gap: 40px; margin-bottom: 32px; justify-content: center; align-items: flex-start;">
+            <div class="design-choice-panel">
+              <h4 class="title is-4">Design Choices</h4>
+              <div class="table-caption" style="font-size: 14px;">
+                <b>Gate design ablation:</b> earliest normalized trigger time for each balanced-accuracy threshold.
+              </div>
+              <div class="results-table-wrapper design-choice-table-wrapper">
+                <table class="results-table design-choice-table">
+                  <thead>
+                    <tr>
+                      <th class="task-column"></th>
+                      <th class="detector-column"></th>
+                      <th class="group-head group-rule" colspan="4" style="font-size: 12px;">
+                        Trigger time at balanced accuracy &ge;
+                      </th>
+                    </tr>
+                    <tr>
+                      <th class="task-column">Task</th>
+                      <th class="detector-column detector-name">Detector</th>
+                      <th>0.80</th>
+                      <th>0.85</th>
+                      <th>0.90</th>
+                      <th>0.95</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="row-group" rowspan="4">Task 0</td>
+                      <td class="detector-name">Full gate</td>
+                      <td><b>.184</b></td><td><b>.211</b></td><td><b>.224</b></td><td><b>.389</b></td>
+                    </tr>
+                    <tr>
+                      <td class="detector-name">Short only</td>
+                      <td>.194</td><td>.228</td><td>.255</td><td>&ndash;</td>
+                    </tr>
+                    <tr>
+                      <td class="detector-name">Long only</td>
+                      <td>.219</td><td>.219</td><td>.234</td><td>.411</td>
+                    </tr>
+                    <tr>
+                      <td class="detector-name">Absolute thresh.</td>
+                      <td>.205</td><td>.266</td><td>.331</td><td>.500</td>
+                    </tr>
+
+                    <tr class="section-rule">
+                      <td class="row-group" rowspan="4">Task 1</td>
+                      <td class="detector-name">Full gate</td>
+                      <td><b>.199</b></td><td>.252</td><td><b>.261</b></td><td><b>.303</b></td>
+                    </tr>
+                    <tr>
+                      <td class="detector-name">Short only</td>
+                      <td>.233</td><td><b>.241</b></td><td>.299</td><td>.324</td>
+                    </tr>
+                    <tr>
+                      <td class="detector-name">Long only</td>
+                      <td>.243</td><td>.260</td><td>.279</td><td>.319</td>
+                    </tr>
+                    <tr>
+                      <td class="detector-name">Absolute thresh.</td>
+                      <td>.270</td><td>.270</td><td>.323</td><td>.385</td>
+                    </tr>
+
+                    <tr class="section-rule">
+                      <td class="row-group" rowspan="4">Task 4</td>
+                      <td class="detector-name">Full gate</td>
+                      <td><b>.206</b></td><td><b>.212</b></td><td><b>.279</b></td><td>.378</td>
+                    </tr>
+                    <tr>
+                      <td class="detector-name">Short only</td>
+                      <td>.342</td><td>.342</td><td>&ndash;</td><td>&ndash;</td>
+                    </tr>
+                    <tr>
+                      <td class="detector-name">Long only</td>
+                      <td>.242</td><td>.312</td><td>.337</td><td>.373</td>
+                    </tr>
+                    <tr>
+                      <td class="detector-name">Absolute thresh.</td>
+                      <td>.313</td><td>.313</td><td>.313</td><td><b>.357</b></td>
+                    </tr>
+
+                    <tr class="section-rule">
+                      <td class="row-group final-row-group" rowspan="4">Task 6</td>
+                      <td class="detector-name">Full gate</td>
+                      <td><b>.215</b></td><td>.265</td><td>.347</td><td>.448</td>
+                    </tr>
+                    <tr>
+                      <td class="detector-name">Short only</td>
+                      <td><b>.215</b></td><td><b>.249</b></td><td>.358</td><td>&ndash;</td>
+                    </tr>
+                    <tr>
+                      <td class="detector-name">Long only</td>
+                      <td>.319</td><td>.319</td><td><b>.329</b></td><td>.551</td>
+                    </tr>
+                    <tr>
+                      <td class="detector-name">Absolute thresh.</td>
+                      <td>.287</td><td>.314</td><td>.355</td><td><b>.445</b></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="reward-backbone-panel">
+              <h4 class="title is-4">Different Reward Model Backbone</h4>
+              <div style="text-align: center; margin-top: 1.5em;">
+                <img src="./static/media/reward_model_ablation.png" alt="Reward model backbone ablation" style="max-width: 100%; width: 500px;">
+              </div>
+              <div style="height:11px;"></div>
+        
+              <!-- <div class="table-caption" style="font-size: 14px;">
+                <b>Different reward model backbone ablation on real-world tasks.</b>
+              </div> -->
+              <div class="results-table-wrapper backbone-table-wrapper">
+                <table class="results-table backbone-table">
+                  <thead>
+                    <tr>
+                      <th class="task-column"></th>
+                      <th class="method-column"></th>
+                      <th class="group-head group-rule" colspan="3">Success rate (%)</th>
+                      <th class="metric-spacer" aria-hidden="true"></th>
+                      <th class="group-head group-rule" colspan="3">ROHE</th>
+                    </tr>
+                    <tr>
+                      <th class="task-column">Task</th>
+                      <th class="method-column method-name">Reward Model</th>
+                      <th>R0</th>
+                      <th>R1</th>
+                      <th>R2</th>
+                      <th class="metric-spacer" aria-hidden="true"></th>
+                      <th>R0</th>
+                      <th>R1</th>
+                      <th>R2</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="row-group" rowspan="2">Stack</td>
+                      <td class="method-name">Robometer-4B</td>
+                      <td>65</td><td><b>75</b></td><td><b>80</b></td>
+                      <td class="metric-spacer" aria-hidden="true"></td>
+                      <td><b>.667</b></td><td><b>.731</b></td><td><b>.643</b></td>
+                    </tr>
+                    <tr>
+                      <td class="method-name">RynnValue-4B</td>
+                      <td>65</td><td>65</td><td>70</td>
+                      <td class="metric-spacer" aria-hidden="true"></td>
+                      <td>.606</td><td>.645</td><td>.613</td>
+                    </tr>
+                    <tr class="section-rule">
+                      <td class="row-group final-row-group" rowspan="2">Pick</td>
+                      <td class="method-name">Robometer-4B</td>
+                      <td>20</td><td><b>30</b></td><td><b>40</b></td>
+                      <td class="metric-spacer" aria-hidden="true"></td>
+                      <td><b>.541</b></td><td>.533</td><td><b>.588</b></td>
+                    </tr>
+                    <tr>
+                      <td class="method-name">RynnValue-4B</td>
+                      <td>20</td><td>25</td><td>25</td>
+                      <td class="metric-spacer" aria-hidden="true"></td>
+                      <td>.515</td><td><b>.556</b></td><td>.571</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              var tabLinks = document.querySelectorAll('#eval-tabs li');
+              var tabPanes = document.querySelectorAll('.tab-pane');
+
+              tabLinks.forEach(function(tab, idx) {
+                tab.addEventListener('click', function() {
+                  var selectedTab = this.getAttribute('data-tab');
+                  // Remove active from all
+                  tabLinks.forEach(function(other) { other.classList.remove('is-active'); });
+                  tab.classList.add('is-active');
+                  // Hide/show panes
+                  tabPanes.forEach(function(pane) {
+                    var show = pane.id === 'tab-' + selectedTab;
+                    pane.style.display = show ? '' : 'none';
+                    // Only play the videos in the visible tab, starting from the beginning
+                    pane.querySelectorAll('video').forEach(function(v) {
+                      if (show) { v.currentTime = 0; v.play(); } else { v.pause(); }
+                    });
+                  });
+                });
+              });
+            });
+          </script>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer" style="padding: 1rem 0;">
+      <div class="container">
+        <div style="display: flex; justify-content: center; align-items: center;">
+          <div style="font-size: 0.95rem; text-align: center;">
+            Website borrowed from
+            <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+          </div>
+        </div>
+      </div>
+
+    </footer>
+  </body>
 </html>
